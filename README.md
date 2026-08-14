@@ -18,17 +18,21 @@ This project automates the provisioning of core AWS infrastructure using Infrast
 
 ## 📁 Project Structure
 
-├── modules/
-│ ├── ec2/ # Reusable EC2 provisioning module
-│ ├── s3/ # Reusable S3 bucket module
-│ └── dynamodb/ # Reusable DynamoDB table module
-├── environments/
-│ ├── dev/ # Development environment configuration
-│ ├── staging/ # Staging environment configuration
-│ └── prod/ # Production environment configuration
-├── variables.tf
-├── outputs.tf
-└── README.md
+```text
+modules/
+├── ec2/           # Reusable EC2 provisioning module
+├── s3/            # Reusable S3 bucket module
+└── dynamodb/      # Reusable DynamoDB table module
+
+environments/
+├── dev/           # Development environment configuration
+├── staging/       # Staging environment configuration
+└── prod/          # Production environment configuration
+
+variables.tf
+outputs.tf
+README.md
+```
 
 
 ## ⚙️ How to Use
@@ -59,12 +63,3 @@ Repeat the same steps inside `environments/staging` or `environments/prod` to pr
 
 Structuring Terraform into reusable modules instead of one flat configuration file made it possible to spin up identical infrastructure across three environments just by changing variable values, rather than rewriting configuration each time. This reinforced core Infrastructure as Code principles: consistency across environments, reduced configuration drift, and faster, safer infrastructure changes.
 
-## 📄 License
-
-This project is licensed under the MIT License — see the `LICENSE` file for details.
-Scroll down, Commit changes
-
-A couple of quick follow-ups worth doing right after this:
-
-Add a LICENSE file if you don't have one yet: Add file → Create new file → filename LICENSE → GitHub will show "Choose a license template" → pick MIT → Commit
-Set description + topics: click the ⚙️ gear icon next to "About" on the repo homepage → description: Modular Terraform configuration for multi-environment AWS infrastructure automation → topics: terraform, aws, iac, devops, cloud
