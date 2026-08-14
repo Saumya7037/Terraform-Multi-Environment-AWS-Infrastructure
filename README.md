@@ -1,312 +1,70 @@
-Multi-Environment AWS Infrastructure Automation using Terraform
+markdown
+# ☁️ Multi-Environment AWS Infrastructure Automation using Terraform
 
-Terraform project for provisioning and managing AWS infrastructure as
-Infrastructure as Code (IaC).
+Reusable, modular Terraform configuration that provisions AWS infrastructure as code (IaC) across **Development, Staging, and Production** environments — built to eliminate manual setup effort and keep environments consistent.
 
-The project is designed to support Development, Staging, and
-Production environments using reusable Terraform configurations,
-variables, and modules.
+## 🛠️ Tech Stack
+`Terraform` `AWS EC2` `AWS S3` `AWS DynamoDB` `VPC` `Security Groups` `Linux` `Git`
 
-Project Overview
+## 🚀 What This Project Does
 
-The goal of this project is to automate AWS infrastructure provisioning
-and reduce manual configuration.
+This project automates the provisioning of core AWS infrastructure using Infrastructure as Code, structured so the same modules can be reused across three separate environments without duplicating configuration.
 
-AWS Resources
+- **Reusable, modular Terraform modules** — built once, reused across Development, Staging, and Production environments
+- **Automated resource provisioning** — EC2 instances, S3 buckets, and DynamoDB tables provisioned automatically, reducing manual infrastructure setup effort
+- **Environment-specific configuration** — Terraform variables drive environment-specific deployments, improving flexibility, consistency, and reusability across environments
+- **Secure access control** — AWS Security Groups and Key Pairs implemented to enforce secure access and resource management
+- **Modular, maintainable structure** — configurations broken into reusable components to support scalable infrastructure deployment
 
-Amazon EC2
+## 📁 Project Structure
 
-Amazon S3
+├── modules/
+│ ├── ec2/ # Reusable EC2 provisioning module
+│ ├── s3/ # Reusable S3 bucket module
+│ └── dynamodb/ # Reusable DynamoDB table module
+├── environments/
+│ ├── dev/ # Development environment configuration
+│ ├── staging/ # Staging environment configuration
+│ └── prod/ # Production environment configuration
+├── variables.tf
+├── outputs.tf
+└── README.md
 
-Amazon DynamoDB
 
-Amazon VPC
+## ⚙️ How to Use
 
-AWS Security Groups
+**Prerequisites:** Terraform installed, AWS CLI configured with valid credentials.
 
-EC2 Key Pairs
+```bash
+# Clone the repository
+git clone https://github.com/Saumya7037/Terraform-Multi-Environment-AWS-Infrastructure.git
+cd Terraform-Multi-Environment-AWS-Infrastructure
 
-Tech Stack
+# Navigate to the environment you want to deploy
+cd environments/dev
 
-Terraform
-
-AWS EC2
-
-AWS S3
-
-AWS DynamoDB
-
-AWS VPC
-
-AWS Security Groups
-
-Linux
-
-Git & GitHub
-
-Architecture
-
-                    Terraform
-                       |
-                       v
-                AWS Provider
-                       |
-        +--------------+--------------+
-        |              |              |
-        v              v              v
-       VPC            EC2             S3
-        |
-        v
-   Security Group
-
-                 DynamoDB
-
-Project Structure
-
-terraform-aws-infrastructure/
-|
-+-- modules/
-|   +-- ec2/
-|   +-- s3/
-|   +-- dynamodb/
-|   +-- vpc/
-|   +-- security-group/
-|
-+-- environments/
-|   +-- dev/
-|   |   +-- main.tf
-|   |   +-- variables.tf
-|   |   +-- terraform.tfvars
-|   |
-|   +-- staging/
-|   |   +-- main.tf
-|   |   +-- variables.tf
-|   |   +-- terraform.tfvars
-|   |
-|   +-- prod/
-|       +-- main.tf
-|       +-- variables.tf
-|       +-- terraform.tfvars
-|
-+-- main.tf
-+-- providers.tf
-+-- variables.tf
-+-- outputs.tf
-+-- .gitignore
-+-- README.md
-
-Key Features
-
-Infrastructure as Code
-
-AWS resources are defined and managed using Terraform instead of manual
-configuration through the AWS Console.
-
-Multi-Environment Support
-
-The project supports separate configurations for:
-
-Development
-
-Staging
-
-Production
-
-This allows infrastructure to be deployed consistently across different
-environments.
-
-Reusable Terraform Modules
-
-Infrastructure components are organized into reusable modules for:
-
-EC2
-
-S3
-
-DynamoDB
-
-VPC
-
-Security Groups
-
-This improves code organization, reusability, and maintainability.
-
-Environment-Specific Configuration
-
-Terraform variables are used to customize infrastructure for different
-environments.
-
-Example:
-
-environment  = "dev"
-instance_type = "t2.micro"
-
-Different values can be provided for staging and production without
-modifying the underlying infrastructure modules.
-
-AWS Security
-
-AWS Security Groups and EC2 Key Pairs are configured to control access
-to infrastructure resources.
-
-Prerequisites
-
-Before running this project, make sure you have:
-
-Terraform installed
-
-AWS CLI installed
-
-Git installed
-
-An AWS account with appropriate IAM permissions
-
-Check Terraform:
-
-terraform --version
-
-Check AWS CLI:
-
-aws --version
-
-AWS Authentication
-
-Configure the AWS CLI:
-
-aws configure
-
-You will be prompted for:
-
-AWS Access Key ID
-AWS Secret Access Key
-Default Region
-Output Format
-
-Important: Never commit AWS credentials, access keys, secret keys,
-or other sensitive information to GitHub.
-
-Deployment
-
-1. Clone the Repository
-
-git clone <YOUR-GITHUB-REPOSITORY-URL>
-cd terraform-aws-infrastructure
-
-2. Initialize Terraform
-
+# Initialize Terraform
 terraform init
 
-This initializes the Terraform working directory and downloads the
-required providers.
-
-3. Format the Configuration
-
-terraform fmt -recursive
-
-4. Validate the Configuration
-
-terraform validate
-
-5. Review the Infrastructure Plan
-
+# Preview the changes
 terraform plan
 
-Terraform will display the resources that will be created, modified, or
-destroyed.
-
-6. Deploy the Infrastructure
-
+# Apply the configuration
 terraform apply
+```
 
-Confirm the deployment when prompted:
+Repeat the same steps inside `environments/staging` or `environments/prod` to provision those environments — the underlying modules stay identical, only the variable values change per environment.
 
-yes
+## 📌 Key Learnings
 
-Destroy Infrastructure
+Structuring Terraform into reusable modules instead of one flat configuration file made it possible to spin up identical infrastructure across three environments just by changing variable values, rather than rewriting configuration each time. This reinforced core Infrastructure as Code principles: consistency across environments, reduced configuration drift, and faster, safer infrastructure changes.
 
-To remove the infrastructure created by Terraform:
+## 📄 License
 
-terraform destroy
+This project is licensed under the MIT License — see the `LICENSE` file for details.
+Scroll down, Commit changes
 
-Warning: Use this command carefully, especially when working with
-production resources.
+A couple of quick follow-ups worth doing right after this:
 
-Terraform Workflow
-
-Write Terraform Configuration
-            |
-            v
-     terraform init
-            |
-            v
-      terraform fmt
-            |
-            v
-    terraform validate
-            |
-            v
-      terraform plan
-            |
-            v
-     terraform apply
-            |
-            v
-    AWS Infrastructure
-
-Learning Outcomes
-
-Through this project, I gained practical understanding of:
-
-Infrastructure as Code (IaC)
-
-Terraform configuration and workflow
-
-Terraform variables and outputs
-
-Reusable Terraform modules
-
-AWS infrastructure provisioning
-
-Multi-environment infrastructure management
-
-EC2 provisioning
-
-S3 and DynamoDB provisioning
-
-VPC configuration
-
-Security Group configuration
-
-Infrastructure automation
-
-Git-based infrastructure management
-
-Future Improvements
-
-Add Terraform remote state using Amazon S3
-
-Implement CI/CD using GitHub Actions
-
-Add Terraform security scanning
-
-Implement automated infrastructure testing
-
-Add CloudWatch monitoring
-
-Add automated Terraform plan checks for pull requests
-
-Improve environment isolation using separate AWS accounts
-
-Disclaimer
-
-This project is created for learning and demonstration purposes. AWS
-resources may incur charges depending on the resources and
-configurations used.
-
-Author
-
-Saumya Kumar
-
-Cloud & DevOps Engineer | AWS | Terraform | Docker | Kubernetes
-
-GitHub: https://github.com/Saumya7037
+Add a LICENSE file if you don't have one yet: Add file → Create new file → filename LICENSE → GitHub will show "Choose a license template" → pick MIT → Commit
+Set description + topics: click the ⚙️ gear icon next to "About" on the repo homepage → description: Modular Terraform configuration for multi-environment AWS infrastructure automation → topics: terraform, aws, iac, devops, cloud
