@@ -1,4 +1,3 @@
-markdown
 # ☁️ Multi-Environment AWS Infrastructure Automation using Terraform
 
 Reusable, modular Terraform configuration that provisions AWS infrastructure as code (IaC) across **Development, Staging, and Production** environments — built to eliminate manual setup effort and keep environments consistent.
@@ -8,32 +7,22 @@ Reusable, modular Terraform configuration that provisions AWS infrastructure as 
 
 ## 🚀 What This Project Does
 
-This project automates the provisioning of core AWS infrastructure using Infrastructure as Code, structured so the same modules can be reused across three separate environments without duplicating configuration.
+This project automates the provisioning of core AWS infrastructure using Infrastructure as Code, structured with a reusable Terraform module so the same configuration can be deployed consistently across multiple environments.
 
-- **Reusable, modular Terraform modules** — built once, reused across Development, Staging, and Production environments
+- **Reusable Terraform module** — core infrastructure logic built once inside `terraform-module/`, reused across environments
 - **Automated resource provisioning** — EC2 instances, S3 buckets, and DynamoDB tables provisioned automatically, reducing manual infrastructure setup effort
-- **Environment-specific configuration** — Terraform variables drive environment-specific deployments, improving flexibility, consistency, and reusability across environments
+- **Environment-specific configuration** — Terraform variables drive environment-specific deployments, improving flexibility, consistency, and reusability
 - **Secure access control** — AWS Security Groups and Key Pairs implemented to enforce secure access and resource management
-- **Modular, maintainable structure** — configurations broken into reusable components to support scalable infrastructure deployment
+- **State locking** — `.terraform.lock.hcl` ensures consistent provider versions across every environment deployment
 
 ## 📁 Project Structure
 
 ```text
-modules/
-├── ec2/           # Reusable EC2 provisioning module
-├── s3/            # Reusable S3 bucket module
-└── dynamodb/      # Reusable DynamoDB table module
-
-environments/
-├── dev/           # Development environment configuration
-├── staging/       # Staging environment configuration
-└── prod/          # Production environment configuration
-
-variables.tf
-outputs.tf
+terraform-module/     # Reusable Terraform module (EC2, S3, DynamoDB, VPC, Security Groups)
+main.tf                # Root configuration calling the module
+.terraform.lock.hcl    # Locked provider versions for consistent deployments
 README.md
 ```
-
 
 ## ⚙️ How to Use
 
@@ -43,9 +32,6 @@ README.md
 # Clone the repository
 git clone https://github.com/Saumya7037/Terraform-Multi-Environment-AWS-Infrastructure.git
 cd Terraform-Multi-Environment-AWS-Infrastructure
-
-# Navigate to the environment you want to deploy
-cd environments/dev
 
 # Initialize Terraform
 terraform init
@@ -57,9 +43,10 @@ terraform plan
 terraform apply
 ```
 
-Repeat the same steps inside `environments/staging` or `environments/prod` to provision those environments — the underlying modules stay identical, only the variable values change per environment.
-
 ## 📌 Key Learnings
 
-Structuring Terraform into reusable modules instead of one flat configuration file made it possible to spin up identical infrastructure across three environments just by changing variable values, rather than rewriting configuration each time. This reinforced core Infrastructure as Code principles: consistency across environments, reduced configuration drift, and faster, safer infrastructure changes.
+Structuring Terraform around a reusable module instead of one flat configuration made it possible to provision consistent infrastructure across environments by changing variable values rather than rewriting configuration each time. This reinforced core Infrastructure as Code principles: consistency, reduced configuration drift, and safer, faster infrastructure changes.
 
+## 📄 License
+
+This project is licensed under the MIT License — see the `LICENSE` file for details.
