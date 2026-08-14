@@ -47,6 +47,4 @@ terraform apply
 
 Structuring Terraform around a reusable module instead of one flat configuration made it possible to provision consistent infrastructure across environments by changing variable values rather than rewriting configuration each time. This reinforced core Infrastructure as Code principles: consistency, reduced configuration drift, and safer, faster infrastructure changes.
 
-## 📄 License
 
-This project is licensed under the MIT License — see the `LICENSE` file for details.
